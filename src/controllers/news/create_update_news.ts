@@ -13,7 +13,6 @@ class CreateUpdateNewsDTO implements INews {
     @IsString()
     @IsNotEmpty()
     content: string;
-    @IsDate()
     createdAt: Date;
     @IsArray()
     tags: string[];
@@ -23,13 +22,13 @@ class CreateUpdateNewsDTO implements INews {
         this.content = content;
         this.createdAt = createdAt;
         this.tags = tags;
+        this.createdAt = new Date();
     }
 }
 
 
 // handler
 async function createUpdateNews(req: Request<{id: String}, {}, INews>, res: Response): Promise<void> {
-    res.send('createUpdateNews');
     // implement get the news from the request body and save it using createNews
     try {
         const news = req.body;
@@ -41,7 +40,7 @@ async function createUpdateNews(req: Request<{id: String}, {}, INews>, res: Resp
         } else {
             // save the news in database
             const id = await createNews(news);
-            res.status(201).send({id});
+            res.send({id});
         }
     } catch (error: any) {
         res.status(400).send({message: error.message});

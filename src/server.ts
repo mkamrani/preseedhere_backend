@@ -1,23 +1,9 @@
 import bodyParser from "body-parser";
 import express from "express";
-import routes from "./routes";
-import debug from "debug";
 import * as winston from "winston";
 import * as expressWinston from "express-winston";
 import cors from "cors";
-
-import { dbConnect, dbCloseConnection } from "./models/db";
-import { exit } from "process";
-
-// connect to mongodb
-dbConnect(process.env.MONGODB_URI || "mongodb://localhost:27017/db", {})
-  .then(() => {
-    console.log("Connected to mongodb");
-  })
-  .catch((err) => {
-    console.log("Error connecting to mongodb: ", err);
-    exit(1);
-  });
+import routes from "./routes";
 
 function createServer(): express.Application {
   const app = express();
@@ -45,7 +31,7 @@ function createServer(): express.Application {
   }
 
   app.use(expressWinston.logger(loggerOptions));
-
+  app.use("/", routes);
   return app;
 }
 
