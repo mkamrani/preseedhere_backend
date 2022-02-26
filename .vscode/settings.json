@@ -1,0 +1,4 @@
+{
+  "mochaExplorer.files":"src/**/**/*.test.js",
+  "mochaExplorer.require": "ts-node/register"
+}
