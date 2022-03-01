@@ -11,13 +11,17 @@ class CreateUpdateNewsDTO implements INews {
     title: string;
     @IsString()
     @IsNotEmpty()
+    thumbnail: string;
+    @IsString()
+    @IsNotEmpty()
     content: string;
     createdAt: Date;
     @IsArray()
     tags: string[];
     // implement constructor
-    constructor(title: string, content: string, createdAt: Date, tags: string[]) {
+    constructor(title: string, thumbnail: string, content: string, createdAt: Date, tags: string[]) {
         this.title = title;
+        this.thumbnail = thumbnail;
         this.content = content;
         this.createdAt = createdAt;
         this.tags = tags;
@@ -45,7 +49,5 @@ async function createUpdateNews(req: Request<{id: String}, {}, INews>, res: Resp
         res.status(400).send({message: error.message});
     }
 }
-
-
 
 export default createUpdateNews;

@@ -26,6 +26,7 @@ describe("Should create and update news", () => {
       .post("/news")
       .send({
         title: "test title",
+        thumbnail: "test thumbnail",
         content: "test content",
         createdAt: new Date(),
         tags: ["test", "test2"],
@@ -42,6 +43,7 @@ describe("Should create and update news", () => {
       .post("/news")
       .send({
         title: "test title",
+        thumbnail: "test thumbnail",
         content: "test content",
         createdAt: new Date(),
         tags: ["test", "test2"],
@@ -53,6 +55,7 @@ describe("Should create and update news", () => {
       .put(`/news/id/${id}`)
       .send({
         title: "test title 2",
+        thumbnail: "test thumbnail 2",
         content: "test content",
         createdAt: new Date(),
         tags: ["test", "test2"],
@@ -68,6 +71,7 @@ describe("Should create and update news", () => {
       .post("/news")
       .send({
         title: "test title",
+        thumbnail: "test thumbnail",
         content: "test content",
         createdAt: new Date(),
         tags: ["test", "test2"],
@@ -80,6 +84,10 @@ describe("Should create and update news", () => {
       console.log(`body`, body);
       expect(statusCode).to.be.equal(200);
       expect(body.id).to.be.equal(id);
+      expect(body.title).to.be.equal("test title");
+      expect(body.content).to.be.equal("test content");
+      expect(body.createdAt).to.be.a("string");
+      expect(body.tags.toString()).to.be.equal("test,test2");
   }
   );
 
@@ -89,6 +97,7 @@ describe("Should create and update news", () => {
       .post("/news")
       .send({
         title: "test title",
+        thumbnail: "test thumbnail",
         content: "test content",
         createdAt: new Date(),
         tags: ["test", "test2"],

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 // mongoose interface for news
 interface INews {
     id?: string;
+    thumbnail?: string;
     title: string;
     content: string;
     createdAt: Date;
@@ -11,6 +12,11 @@ interface INews {
 
 const newsSchema = new mongoose.Schema<INews>({
     title: {
+        type: String, 
+        required: true
+    },
+    
+    thumbnail: {
         type: String, 
         required: true
     },
