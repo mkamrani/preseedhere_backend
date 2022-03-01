@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { createNews, deleteNews, getNews, updateNews } from "../../src/models/news.service";
+import { createNews, deleteNewsById, getNewsById, updateNews } from "../../src/models/news.service";
 import { INews } from "../../src/models/news";
 import { connect, clearDatabase, closeDatabase } from "./db";
 
@@ -42,7 +42,7 @@ describe("News model methods should work", () => {
     };
     const createdNewsId = await createNews(news);
     console.log(`'createdNewsId'`, createdNewsId);
-    const got = await getNews(createdNewsId);
+    const got = await getNewsById(createdNewsId);
     expect(got).to.be.an("object");
     expect(got?.content).to.be.equal(news.content);
     expect(got?.tags.toString()).to.be.equal(news.tags.toString());
@@ -59,8 +59,8 @@ describe("News model methods should work", () => {
     };
     const createdNewsId = await createNews(news);
     console.log(`'createdNewsId'`, createdNewsId);
-    await deleteNews(createdNewsId);
-    const got = await getNews(createdNewsId);
+    await deleteNewsById(createdNewsId);
+    const got = await getNewsById(createdNewsId);
     expect(got).to.be.null;
   });
 
@@ -81,7 +81,7 @@ describe("News model methods should work", () => {
       tags: ["test", "test2"],
     };
     await updateNews(createdNewsId, updatedNews);
-    const got = await getNews(createdNewsId);
+    const got = await getNewsById(createdNewsId);
     expect(got).to.be.an("object");
     expect(got?.content).to.be.equal(updatedNews.content);
     expect(got?.tags.toString()).to.be.equal(updatedNews.tags.toString());

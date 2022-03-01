@@ -3,7 +3,6 @@
 import request from "supertest";
 
 import { expect } from "chai";
-import createUpdateNews from "../../src/controllers/news/create_update_news";
 import { connect, clearDatabase, closeDatabase } from "../models/db";
 import createServer from "../../src/server";
 
@@ -63,5 +62,50 @@ describe("Should create and update news", () => {
   }
   );
 
+  // test GET /news/:id
+  it("should get a news", async () => {
+    const {body: addBody} = await request(app)
+      .post("/news")
+      .send({
+        title: "test title",
+        content: "test content",
+        createdAt: new Date(),
+        tags: ["test", "test2"],
+      });
+      console.log(`body`, addBody);
+      const id = addBody.id;
+
+    const {statusCode, body} = await request(app)
+      .get(`/news/id/${id}`);
+      console.log(`body`, body);
+      expect(statusCode).to.be.equal(200);
+      expect(body.id).to.be.equal(id);
+  }
+  );
+
+  // test DELETE /news/:id
+  it("should delete a news", async () => {
+    const {body: addBody} = await request(app)
+      .post("/news")
+      .send({
+        title: "test title",
+        content: "test content",
+        createdAt: new Date(),
+        tags: ["test", "test2"],
+      });
+      console.log(`body`, addBody);
+      const id = addBody.id;
+
+    const {statusCode} = await request(app)
+      .delete(`/news/id/${id}`);
+      expect(statusCode).to.be.equal(200);
+    
+    const {statusCode: statusCodeNew} = await request(app)
+      .delete(`/news/id/${id}`);
+      expect(statusCodeNew).to.be.equal(400);
+  }
+  );
+
 
 });
+

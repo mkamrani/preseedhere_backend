@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import { INews } from '../../models/news';
-import {IsArray, IsDate, IsNotEmpty, IsString, Length} from  'class-validator';
-import { ClassConstructor, plainToClass } from "class-transformer";
+import {IsArray, IsDate, IsNotEmpty, IsString} from  'class-validator';
 import { validateDto } from '../validator';
-import { createNews, updateNews } from '../../models/news.service';
+import { createNews, getNewsById, updateNews } from '../../models/news.service';
 
 
 class CreateUpdateNewsDTO implements INews {
@@ -45,14 +44,8 @@ async function createUpdateNews(req: Request<{id: String}, {}, INews>, res: Resp
     } catch (error: any) {
         res.status(400).send({message: error.message});
     }
-
-
 }
 
 
 
-
 export default createUpdateNews;
-
-
-

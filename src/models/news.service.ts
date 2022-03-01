@@ -14,20 +14,20 @@ async function updateNews(newsId: String, news: INews): Promise<void> {
 }
 
 // implement deleteNews
-async function deleteNews(newsId: String): Promise<void> {
-    await NewsModel.findByIdAndRemove(newsId);
+async function deleteNewsById(newsId: String): Promise<void | null> {
+    return await NewsModel.findByIdAndRemove(newsId, { new: true });
 }
 
 // implement getNews
-async function getNews(newsId: String): Promise<INews | null> {
+async function getNewsById(newsId: String): Promise<INews | null> {
     const news = await NewsModel.findById(newsId);
     return news;
 }
 
 export {
   createNews,
-  deleteNews,
-  getNews,
+  deleteNewsById,
+  getNewsById,
   updateNews
 }
 

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 // mongoose interface for news
 interface INews {
+    id?: string;
     title: string;
     content: string;
     createdAt: Date;
@@ -25,7 +26,11 @@ const newsSchema = new mongoose.Schema<INews>({
     tags: {
         type: [String],
     }
-  });
+  }, { toJSON: { virtuals: true } });
+
+newsSchema.virtual("id").get(function(this: mongoose.Document) {
+    return this._id;
+});
 
 const NewsModel = mongoose.model<INews>('News', newsSchema);
 export {
