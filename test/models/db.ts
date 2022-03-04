@@ -9,7 +9,7 @@ const connect = async () => {
   mongod = await MongoMemoryServer.create();
   // connect to mongodb
   const uri = mongod.getUri();
-  await dbConnect(uri, {});
+  await dbConnect(uri);
 };
 
 const clearDatabase = async () => {
@@ -17,9 +17,14 @@ const clearDatabase = async () => {
     // get all the mongodb collections
     const collections = mongoose.connection.collections;
     // drop all the collections
-    for (const key in collections) { 
-        const collection = collections[key];
-        await collection.drop();
+    try {
+      
+      for (const key in collections) { 
+          const collection = collections[key];
+          await collection.drop();
+      }
+    } catch (error) {
+      
     }
     // mongod.stop();
 };

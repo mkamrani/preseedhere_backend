@@ -14,9 +14,13 @@ describe("Should create and update news", () => {
     await connect();
   });
 
+  // run after each tests
+  afterEach(async () => {
+    await clearDatabase();
+  });
+
   // run after all the tests
   after(async () => {
-    await clearDatabase();
     await closeDatabase();
   });
 

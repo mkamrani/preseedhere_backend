@@ -4,7 +4,7 @@ import { dbConnect, dbCloseConnection } from "./models/db";
 import { exit } from "process";
 import createServer from "./server";
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8001;
 const MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/db";
 
 (async () => {

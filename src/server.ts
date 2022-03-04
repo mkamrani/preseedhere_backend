@@ -9,7 +9,7 @@ function createServer(): express.Application {
   const app = express();
 
   // use body parser middleware
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: "5mb" }));
   app.use(bodyParser.urlencoded({ extended: true }));
 
   // here we are adding middleware to allow cross-origin requests

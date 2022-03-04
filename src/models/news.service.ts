@@ -40,4 +40,9 @@ async function getNews(
   return news;
 }
 
-export { createNews, deleteNewsById, getNewsById, updateNews, getNews };
+// get news count
+async function getNewsCount(): Promise<number> {
+  return await NewsModel.countDocuments();
+}
+
+export { createNews, deleteNewsById, getNewsById, updateNews, getNews, getNewsCount };

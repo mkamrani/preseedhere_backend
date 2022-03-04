@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { INews } from '../../models/news';
 import {IsArray, IsDate, IsNotEmpty, IsString} from  'class-validator';
 import { validateDto } from '../validator';
-import { createNews, getNewsById, updateNews } from '../../models/news.service';
+import { createNews, updateNews } from '../../models/news.service';
 
 
 class CreateUpdateNewsDTO implements INews {
@@ -32,7 +32,6 @@ class CreateUpdateNewsDTO implements INews {
 
 // handler
 async function createUpdateNews(req: Request<{id: String}, {}, INews>, res: Response): Promise<void> {
-    // implement get the news from the request body and save it using createNews
     try {
         const news = req.body;
         await validateDto(CreateUpdateNewsDTO, news);

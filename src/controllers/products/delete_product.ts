@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { deleteNewsById } from "../../models/news.service";
+import { deleteProductById } from "../../models/products.service";
 
 // get news handler
-async function deleteNews(
+async function deleteProducts(
   req: Request<{ id: String }, {}, {}, {}>,
   res: Response
 ): Promise<void> {
   try {
     const id = req.params.id;
-    const news = await deleteNewsById(id);
+    const news = await deleteProductById(id);
     if (!news) {
       res.status(400).send({ message: "element not found" });
       return;
@@ -19,4 +19,4 @@ async function deleteNews(
   }
 }
 
-export default deleteNews;
+export default deleteProducts;

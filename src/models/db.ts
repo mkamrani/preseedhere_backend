@@ -20,7 +20,7 @@ function dbConnect(
       reject(err);
     });
     console.log(`Connecting to mongodb: ${uri}`);
-    mongoose.connect(uri);
+    mongoose.connect(uri, connectOptions);
   })
 }
 

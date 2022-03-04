@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getNewsById, getNews as getAllNews } from "../../models/news.service";
+import { getNewsById, getNews as getAllNews, getNewsCount } from "../../models/news.service";
 import { IGetQueryParams } from "../../models/utils";
 
 class GetQueryParams implements IGetQueryParams {}
@@ -11,6 +11,9 @@ async function getNewsList(
 ): Promise<void> {
   try {
     const news = await getAllNews(req.query);
+    const count = await getNewsCount();
+    res.header('Access-Control-Expose-Headers', 'X-Total-Count')
+    res.header("X-Total-Count", count.toString())
     res.send(news);
   } catch (error: any) {
     res.status(400).send({ message: error.message });
