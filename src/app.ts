@@ -7,6 +7,14 @@ import createServer from "./server";
 const PORT = process.env.PORT || 8001;
 const MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/db";
 
+import {config as configDotenv} from 'dotenv'
+
+
+configDotenv();
+
+
+
+
 (async () => {
   try {
     // connect to mongodb
@@ -16,8 +24,10 @@ const MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/db";
     console.log("Error connecting to mongodb: ", err.message);
     exit(1);
   }
+  
 
   const app = createServer();
+
   const server = app.listen(PORT, () => {
     console.log(`⚡️Server is listening on port: ${PORT}`);
   });
